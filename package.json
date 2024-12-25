@@ -1,0 +1,33 @@
+{
+  "name": "rsbuild-electron",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./out/main/index.js",
+  "scripts": {
+    "build": "rsbuild build -w",
+    "check": "biome check --write",
+    "dev": "chcp 65001 && concurrently \"pnpm --filter main run dev\" \"pnpm --filter preload run dev\" \"pnpm --filter renderer run dev\"",
+    "dev:electron": "electron ./out/main/index.js",
+    "lint": "eslint .",
+    "lint:fix": "nr lint --fix",
+    "preview": "rsbuild preview",
+    "postinstall": "electron-builder install-app-deps",
+    "build:win": "pnpm --filter renderer run build && electron-builder --win"
+  },
+  "dependencies": {
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.12.1",
+    "@antfu/ni": "^0.23.2",
+    "@biomejs/biome": "^1.9.3",
+    "@rsbuild/core": "^1.1.8",
+    "@rsbuild/plugin-vue": "^1.0.5",
+    "concurrently": "^9.1.0",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "eslint": "^9.17.0",
+    "rsbuild-electron-restart": "workspace:*",
+    "typescript": "^5.7.2"
+  }
+}
