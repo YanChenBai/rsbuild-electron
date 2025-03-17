@@ -1,4 +1,3 @@
-import path from 'node:path'
 import { app, BrowserWindow } from 'electron'
 
 function startApp() {
@@ -12,8 +11,8 @@ function startApp() {
       },
     })
 
-    // win.loadURL('http://localhost:4321')
-    win.loadFile(path.resolve(__dirname, '../renderer/index.html'))
+    win.loadURL('http://localhost:4321')
+    // win.loadFile(path.resolve(__dirname, '../renderer/index.html'))
   })
 }
 startApp()
