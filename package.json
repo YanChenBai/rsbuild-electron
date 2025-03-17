@@ -5,30 +5,40 @@
   "packageManager": "pnpm@9.15.9",
   "main": "./out/main/index.js",
   "scripts": {
-    "build": "rsbuild build -w",
     "check": "biome check --write",
-    "dev": "chcp 65001 && concurrently \"pnpm --filter main run dev\" \"pnpm --filter preload run dev\" \"pnpm --filter renderer run dev\"",
+    "dev": "chcp 65001 && run-p dev:electron dev:preload dev:renderer",
+    "dev:main": "pnpm --filter main run dev",
+    "dev:preload": "pnpm --filter preload run dev",
+    "dev:renderer": "pnpm --filter renderer run dev",
     "dev:electron": "electron ./out/main/index.js",
+    "build:pred": "run-p build:main build:preload build:renderer",
+    "build:main": "pnpm --filter main run build",
+    "build:preload": "pnpm --filter preload run build",
+    "build:renderer": "pnpm --filter renderer run build",
     "lint": "eslint .",
     "lint:fix": "nr lint --fix",
     "preview": "rsbuild preview",
     "postinstall": "electron-builder install-app-deps",
-    "build:win": "pnpm --filter renderer run build && electron-builder --win"
+    "build:win": "build:pred && electron-builder --win"
   },
   "dependencies": {
+    "@byc/tipc": "^0.0.92",
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.12.1",
+    "@antfu/eslint-config": "^4.10.1",
     "@antfu/ni": "^0.23.2",
-    "@biomejs/biome": "^1.9.3",
     "@rsbuild/core": "^1.1.8",
-    "@rsbuild/plugin-vue": "^1.0.5",
-    "concurrently": "^9.1.0",
     "electron": "^33.2.1",
     "electron-builder": "^25.1.8",
-    "eslint": "^9.17.0",
+    "eslint": "^9.22.0",
+    "eslint-plugin-astro": "^1.3.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "hmc-win32": "^1.4.92",
+    "jiti": "^2.4.2",
+    "prisma": "^6.5.0",
     "rsbuild-electron-restart": "workspace:*",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "unocss": "66.1.0-beta.5"
   }
 }

@@ -82,7 +82,7 @@ export function electronRestart(options: { script: string, root?: string, firstS
 
       api.modifyRsbuildConfig(() => exit())
 
-      api.onBeforeBuild(async ({ isFirstCompile }) => {
+      api.onBeforeBuild(async ({ isFirstCompile, isWatch }) => {
         if (isFirstCompile && !firstStart)
           return
 
@@ -92,6 +92,9 @@ export function electronRestart(options: { script: string, root?: string, firstS
 
         if (!packageManager)
           throw new Error('No package manager detected')
+
+        if (!isWatch)
+          return
 
         // 启动新进程
         try {

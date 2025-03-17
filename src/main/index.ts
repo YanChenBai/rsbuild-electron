@@ -12,8 +12,8 @@ function startApp() {
       },
     })
 
-    win.loadURL('http://localhost:3000')
-    // win.loadFile(path.resolve(__dirname, '../renderer/index.html'))
+    // win.loadURL('http://localhost:4321')
+    win.loadFile(path.resolve(__dirname, '../renderer/index.html'))
   })
 }
 startApp()
