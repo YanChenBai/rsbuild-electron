@@ -2,6 +2,7 @@
   "name": "rsbuild-electron",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@9.15.9",
   "main": "./out/main/index.js",
   "scripts": {
     "build": "rsbuild build -w",
