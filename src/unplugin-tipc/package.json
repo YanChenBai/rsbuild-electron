@@ -1,5 +1,5 @@
 {
-  "name": "unplugin-auto-tipc",
+  "name": "unplugin-tipc",
   "type": "module",
   "version": "0.0.1",
   "description": "",
@@ -9,5 +9,8 @@
     ".": {
       "import": "./index.ts"
     }
+  },
+  "dependencies": {
+    "ts-morph": "^25.0.1"
   }
 }
