@@ -1,2 +1,3 @@
-// eslint-disable-next-line no-console
-console.log(2)
+import { exposeTipc } from '@byc/tipc/preload'
+
+exposeTipc()

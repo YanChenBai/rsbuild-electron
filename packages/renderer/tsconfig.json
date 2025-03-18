@@ -5,6 +5,10 @@
     "allowImportingTsExtensions": false,
     "noEmit": false
   },
-  "include": [".astro/types.d.ts", "**/*"],
+  "include": [
+    ".astro/types.d.ts",
+    "**/*",
+    "../types/**/*"
+  ],
   "exclude": ["dist"]
 }

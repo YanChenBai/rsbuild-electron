@@ -1,13 +1,31 @@
 ---
-import NameDisplay from '../components/NameDisplay.vue'
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
-import Welcome from '../components/Welcome.astro'
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/Layout.astro'
 ---
 
+<script>
+import { invoke } from '@byc/tipc'
+
+function selectBtnById(id: string, cb: () => void) {
+  return document.querySelector<HTMLButtonElement>(`#${id}`)?.addEventListener('click', cb)
+}
+
+selectBtnById('min', () => {
+  invoke.window.min()
+})
+
+selectBtnById('max', () => {
+  invoke.window.max()
+})
+
+selectBtnById('close', () => {
+  invoke.window.close()
+})
+</script>
+
 <Layout>
-  <NameDisplay client:only="vue" />
-  <Welcome />
+  <div class="p2">
+    <button id="min" class="px2 py1">最小化</button>
+    <button id="max" class="px2 py1">最大化</button>
+    <button id="close" class="px2 py1">关闭</button>
+  </div>
 </Layout>

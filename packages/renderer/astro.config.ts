@@ -1,5 +1,6 @@
 import vue from '@astrojs/vue'
 import { defineConfig } from 'astro/config'
+import unocss from 'unocss/astro'
 
 // https://astro.build/config
 export default defineConfig({
@@ -7,6 +8,7 @@ export default defineConfig({
   outDir: '../../out/renderer',
   integrations: [
     vue(),
+    unocss(),
   ],
   build: {
     assetsPrefix: './',
