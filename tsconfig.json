@@ -1,16 +1,20 @@
 {
+  "compilerOptions": {
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
+  },
   "references": [
     {
-      "path": "./src/main"
+      "path": "./packages/main"
     },
     {
-      "path": "./src/preload"
+      "path": "./packages/preload"
     },
     {
-      "path": "./src/renderer"
+      "path": "./packages/renderer"
     },
     {
-      "path": "./src/rsbuild-electron-restart"
+      "path": "./packages/rsbuild-electron-restart"
     }
   ]
 }

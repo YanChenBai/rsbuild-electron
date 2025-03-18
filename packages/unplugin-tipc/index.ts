@@ -14,6 +14,8 @@ interface ScanResult {
   genericsSources: Record<string, string>
 }
 
+const removeSingle = (v: string) => v.replace(/['"]/g, '')
+
 // 解析类型信息
 function resolveTypeInfo(typeNode: TypeReferenceNode) {
   const typeName = typeNode.getTypeName().getText()
@@ -24,17 +26,19 @@ function resolveTypeInfo(typeNode: TypeReferenceNode) {
 
     declarations?.forEach((decl) => {
       const sourceFile = decl.getSourceFile()
-      const importPath = sourceFile.getFilePath()
+      const filePath = sourceFile.getFilePath()
 
       if (decl.getKind() === SyntaxKind.ImportSpecifier) {
         // 类型安全转换
         const importSpecifier = decl.asKindOrThrow(SyntaxKind.ImportSpecifier)
         const importDecl = importSpecifier.getImportDeclaration()
         const moduleSpecifier = importDecl.getModuleSpecifier().getText()
-        console.log(`类型 ${typeName} 导入路径: ${moduleSpecifier}`)
+
+        console.log(path.resolve(path.dirname(filePath), removeSingle(moduleSpecifier)))
+        // console.log(`类型 ${typeName} 导入路径: ${moduleSpecifier}`)
       }
       else {
-        console.log(`类型 ${typeName} 定义于: ${importPath}`)
+        console.log(`类型 ${typeName} 定义于: ${filePath}`)
       }
     })
   }
