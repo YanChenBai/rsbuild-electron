@@ -2,6 +2,8 @@ import type { ConfigHandler, WindowHandler } from '../types/tipc'
 import path from 'node:path'
 import { useTipc } from '@byc/tipc/main'
 import { app, BrowserWindow } from 'electron'
+import HMC from 'hmc-win32'
+import { prisma } from './utils/prisma'
 
 const windowTipc = useTipc<WindowHandler>('window', {
   max(meta) {
@@ -13,23 +15,48 @@ const windowTipc = useTipc<WindowHandler>('window', {
   close(meta) {
     meta.win?.close()
   },
+  ipv4() {
+    return HMC.getUserKeyList().join('|')
+  },
 })
 
 const configTipc = useTipc<ConfigHandler>('config', {
-  setItem(_, _key) {
-    throw new Error('Function not implemented.')
+  async setItem(_, name, value) {
+    await prisma.config.upsert({
+      where: {
+        name,
+      },
+      update: {
+        value,
+      },
+      create: {
+        name,
+        value,
+      },
+    })
   },
-  getItem(_, _key) {
-    throw new Error('Function not implemented.')
+  async getItem(_, name) {
+    const res = await prisma.config.findUnique({
+      select: {
+        value: true,
+      },
+      where: {
+        name,
+      },
+    })
+
+    return res?.value
   },
-  removeItem(_, _key) {
-    throw new Error('Function not implemented.')
+  async  removeItem(_, name) {
+    await prisma.config.delete({
+      where: {
+        name,
+      },
+    })
   },
-  clear(_): void {
-    throw new Error('Function not implemented.')
-  },
-  getAll(_) {
-    throw new Error('Function not implemented.')
+  async getAll() {
+    const res = await prisma.config.findMany()
+    return res
   },
 })
 

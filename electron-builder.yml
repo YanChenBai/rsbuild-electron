@@ -15,6 +15,16 @@ win:
   executableName: blive-monitor-next
   icon: build/icon.ico
 
+extraResources:
+  - from: node_modules/hmc-win32
+    to: hmc-win32
+    filter:
+      - '**/*.node'
+  - from: node_modules/.prisma
+    to: .prisma
+    filter:
+      - '**/*.node'
+
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}

@@ -5,12 +5,12 @@ export interface WindowHandler extends FnMap {
   max: () => void
   min: () => void
   close: () => void
+  ipv4: () => string
 }
 
 export interface ConfigHandler extends FnMap {
-  setItem: (key: string, value: string) => Config
-  getItem: (key: string) => Config
-  removeItem: (key: string) => void
-  clear: () => void
-  getAll: () => Config[]
+  setItem: (name: string, value: string) => Promise<void>
+  getItem: (name: string) => Promise<string | undefined>
+  removeItem: (name: string) => Promise<void>
+  getAll: () => Promise<Config[]>
 }
