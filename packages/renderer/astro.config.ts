@@ -8,7 +8,9 @@ export default defineConfig({
   outDir: '../../out/renderer',
   integrations: [
     vue(),
-    unocss(),
+    unocss({
+      injectReset: '@unocss/reset/tailwind-compat.css',
+    }),
   ],
   build: {
     assetsPrefix: './',

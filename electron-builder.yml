@@ -1,5 +1,5 @@
 appId: com.blive.app
-productName: blive-monitor-new
+productName: rsbuild-electron
 directories:
   buildResources: build
 files:
@@ -15,6 +15,8 @@ win:
   executableName: blive-monitor-next
   icon: build/icon.ico
 
+asar: true
+
 extraResources:
   - from: node_modules/hmc-win32
     to: hmc-win32
@@ -23,7 +25,7 @@ extraResources:
   - from: node_modules/.prisma
     to: .prisma
     filter:
-      - '**/*.node'
+      - '**/*.{node,dll}'
 
 nsis:
   artifactName: ${name}-${version}-setup.${ext}

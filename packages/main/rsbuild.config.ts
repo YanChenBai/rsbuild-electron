@@ -1,6 +1,8 @@
 import { resolve } from 'node:path'
+import process from 'node:process'
 import { defineConfig } from '@rsbuild/core'
 import { electronRestart } from 'rsbuild-electron-restart'
+// import { unpluginTipc } from 'unplugin-tipc'
 
 export default defineConfig({
   root: resolve(__dirname, '.'),
@@ -9,6 +11,7 @@ export default defineConfig({
       script: 'dev:electron',
       root: resolve(__dirname, '../../'),
     }),
+    // unpluginTipc(),
   ],
   source: {
     entry: {
@@ -29,6 +32,8 @@ export default defineConfig({
         electronMain: true,
       },
       target: 'electron-main',
+      externals: process.env.DEV ? ['sharp', 'hmc-win32'] : ['sharp'],
+
     },
   },
 })

@@ -1,8 +1,10 @@
-import type { ConfigHandler, WindowHandler } from '../types/tipc'
+import type { ConfigHandler, ImageHandler, WindowHandler } from '../types/tipc'
 import path from 'node:path'
 import { useTipc } from '@byc/tipc/main'
-import { app, BrowserWindow } from 'electron'
-import HMC from 'hmc-win32'
+import { is } from '@electron-toolkit/utils'
+import { app, BrowserWindow, Menu } from 'electron'
+import { getUserKeyList } from 'hmc-win32'
+import sharp from 'sharp'
 import { prisma } from './utils/prisma'
 
 const windowTipc = useTipc<WindowHandler>('window', {
@@ -16,7 +18,7 @@ const windowTipc = useTipc<WindowHandler>('window', {
     meta.win?.close()
   },
   ipv4() {
-    return HMC.getUserKeyList().join('|')
+    return getUserKeyList().join('|')
   },
 })
 
@@ -60,15 +62,27 @@ const configTipc = useTipc<ConfigHandler>('config', {
   },
 })
 
+const imageTipc = useTipc<ImageHandler>('image', {
+  async readImage(_, path, size) {
+    const buffer = await sharp(path)
+      .resize(size)
+      .webp()
+      .toBuffer()
+    return new Uint8Array(buffer).buffer
+  },
+})
+
 function startApp() {
   app.whenReady()
-    .then(() => {
+    .then(async () => {
       windowTipc.init()
       configTipc.init()
+      imageTipc.init()
 
       const win = new BrowserWindow({
         width: 800,
         height: 600,
+        frame: false,
         webPreferences: {
           sandbox: false,
           nodeIntegration: false,
@@ -77,8 +91,11 @@ function startApp() {
         },
       })
 
-      win.loadURL('http://localhost:4321')
-    // win.loadFile(path.resolve(__dirname, '../renderer/index.html'))
+      Menu.setApplicationMenu(null)
+
+      is.dev
+        ? win.loadURL('http://localhost:4321')
+        : win.loadFile(path.resolve(__dirname, '../renderer/index.html'))
     })
 }
 startApp()

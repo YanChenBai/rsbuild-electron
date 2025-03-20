@@ -44,16 +44,31 @@ window.onload = () => {
         console.log(res)
       })
   })
+
+  const startTime = Date.now()
+  invoke.image.readImage('D:\\byc_file\\qq\\弥生提交.jpg', 1000)
+    .then((res) => {
+      const blob = new Blob([res], { type: 'image/webp' })
+      const imgUrl = URL.createObjectURL(blob)
+      document.querySelector('#img')?.setAttribute('src', imgUrl)
+      console.log(Date.now() - startTime)
+    })
 }
 </script>
 
 <Layout>
-  <div class="p2">
-    <button id="min" class="px2 py1">最小化</button>
-    <button id="max" class="px2 py1">最大化</button>
-    <button id="close" class="px2 py1">关闭</button>
-    <button id="config-get" class="px2 py1">Get config</button>
-    <button id="config-add" class="px2 py1">Add config</button>
-    <button id="get-user-list" class="px2 py1">Get user list</button>
+  <div>
+    <div class="bg-white/10 h-8 drag flex justify-end">
+      <button id="min" class="px2 py1 no-drag">最小化</button>
+      <button id="max" class="px2 py1 no-drag">最大化</button>
+      <button id="close" class="px2 py1 no-drag">关闭</button>
+    </div>
+
+    <div class="p2">
+      <button id="config-get" class="px2 py1">Get config</button>
+      <button id="config-add" class="px2 py1">Add config</button>
+      <button id="get-user-list" class="px2 py1">Get user list</button>
+      <img id="img" />
+    </div>
   </div>
 </Layout>

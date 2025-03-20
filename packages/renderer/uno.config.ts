@@ -15,6 +15,7 @@ export default defineConfig({
     // ...
   ],
   rules: [
+    ['electron:hover', {}],
     [/^h-(\d+)dvh$/, ([_, d]) => {
       return [
         ['height', `${d}vh`],
@@ -33,6 +34,19 @@ export default defineConfig({
         ['max-height', `${d}dvh`],
       ]
     }],
+    ['no-drag', { '-webkit-app-region': 'no-drag' }],
+    ['drag', { '-webkit-app-region': 'drag' }],
+    ['drag-inactive', { '-webkit-app-region': 'drag-inactive' }],
+    ['resize', { '-webkit-app-region': 'no-resize' }],
+    [
+      'flex-box',
+      {
+        'display': 'flex',
+        'width': '100%',
+        'justify-content': 'center',
+        'align-items': 'center',
+      },
+    ],
   ],
   theme: {
     colors: {

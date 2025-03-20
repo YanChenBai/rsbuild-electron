@@ -14,3 +14,7 @@ export interface ConfigHandler extends FnMap {
   removeItem: (name: string) => Promise<void>
   getAll: () => Promise<Config[]>
 }
+
+export interface ImageHandler extends FnMap {
+  readImage: (path: string, size?: number) => Promise<ArrayBuffer>
+}

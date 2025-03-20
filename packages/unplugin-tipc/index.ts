@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { RsbuildPlugin } from '@rsbuild/core'
 import type { TypeReferenceNode } from 'ts-morph'
 import path from 'node:path'
@@ -5,19 +6,13 @@ import { Project, SyntaxKind } from 'ts-morph'
 
 interface Options {
   tsconfigName?: string
-}
-
-interface ScanResult {
-  functionName: string
-  generics: string[]
-  firstArg: string
-  genericsSources: Record<string, string>
+  root?: string
 }
 
 const removeSingle = (v: string) => v.replace(/['"]/g, '')
 
 // 解析类型信息
-function resolveTypeInfo(typeNode: TypeReferenceNode) {
+function resolveTypeInfo(typeNode: TypeReferenceNode, root: string) {
   const typeName = typeNode.getTypeName().getText()
   const symbol = typeNode.getTypeName().getSymbol()
 
@@ -34,21 +29,35 @@ function resolveTypeInfo(typeNode: TypeReferenceNode) {
         const importDecl = importSpecifier.getImportDeclaration()
         const moduleSpecifier = importDecl.getModuleSpecifier().getText()
 
-        console.log(path.resolve(path.dirname(filePath), removeSingle(moduleSpecifier)))
-        // console.log(`类型 ${typeName} 导入路径: ${moduleSpecifier}`)
+        const importAbsPath = path.resolve(path.dirname(filePath), removeSingle(moduleSpecifier))
+        const importPath = path.relative(root, importAbsPath)
+
+        const exportSymbol = sourceFile.getSymbol()?.getExport(
+          symbol!.getName() === 'default' ? 'default' : symbol!.getName(),
+        )
+
+        console.log(importDecl.getModuleSpecifierValue())
+
+        const isDefault = Boolean(
+          exportSymbol?.getDeclarations()?.some(d =>
+            d.getKind() === SyntaxKind.ExportAssignment,
+          ),
+        )
+
+        console.log(`import ${typeName} from '${importPath}'`, isDefault)
       }
       else {
-        console.log(`类型 ${typeName} 定义于: ${filePath}`)
+        // console.log(`类型 ${typeName} 定义于: ${filePath}`)
       }
     })
   }
   else {
-    console.log(`类型 ${typeName} 未找到定义`)
+    // console.log(`类型 ${typeName} 未找到定义`)
   }
 }
-function findUseTipc(project: Project) {
-  const results: ScanResult[] = []
-  const importsMap = new Map<string, Set<string>>()
+function findUseTipc(project: Project, root: string) {
+  // const results: ScanResult[] = []
+  // const importsMap = new Map<string, Set<string>>()
 
   const sourceFiles = project.getSourceFiles(['**/*.ts', '**/*.tsx'])
   for (const sourceFile of sourceFiles) {
@@ -67,9 +76,6 @@ function findUseTipc(project: Project) {
       if (functionName !== 'useTipc')
         continue
 
-      // 在扫描泛型类型时替换为以下代码
-      const typeChecker = project.getTypeChecker() // 获取类型检查器
-
       // 提取泛型参数
       const typeArgs = callExpr.getTypeArguments()
 
@@ -77,30 +83,26 @@ function findUseTipc(project: Project) {
         .map(t => t.asKind(SyntaxKind.TypeReference))
 
       if (handlerType) {
-        resolveTypeInfo(handlerType)
+        resolveTypeInfo(handlerType, root)
       }
 
       if (listenerType) {
-        resolveTypeInfo(listenerType)
+        resolveTypeInfo(listenerType, root)
       }
     }
   }
 }
 
 export function unpluginTipc(options: Options = {}): RsbuildPlugin {
-  const { tsconfigName = 'tsconfig.json' } = options
-
   return {
     name: 'unplugin-tipc',
     setup(api) {
+      const { tsconfigName = 'tsconfig.json', root = api.context.rootPath } = options
+
       const tsConfigFilePath = path.join(api.context.rootPath, tsconfigName)
       const project = new Project({ tsConfigFilePath })
 
-      findUseTipc(project)
-
-      api.onBeforeBuild((opt) => {
-
-      })
+      findUseTipc(project, root)
     },
   }
 }
