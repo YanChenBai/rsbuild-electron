@@ -2,9 +2,10 @@ import type { ConfigHandler, ImageHandler, WindowHandler } from '../types/tipc'
 import path from 'node:path'
 import { useTipc } from '@byc/tipc/main'
 import { is } from '@electron-toolkit/utils'
-import { app, BrowserWindow, Menu } from 'electron'
+import { app, BrowserWindow } from 'electron'
 import { getUserKeyList } from 'hmc-win32'
 import sharp from 'sharp'
+import { mouseListener } from './utils/mouseListener'
 import { prisma } from './utils/prisma'
 
 const windowTipc = useTipc<WindowHandler>('window', {
@@ -79,10 +80,13 @@ function startApp() {
       configTipc.init()
       imageTipc.init()
 
+      mouseListener()
+
       const win = new BrowserWindow({
         width: 800,
         height: 600,
         frame: false,
+        type: 'toolbar',
         webPreferences: {
           sandbox: false,
           nodeIntegration: false,
@@ -91,7 +95,7 @@ function startApp() {
         },
       })
 
-      Menu.setApplicationMenu(null)
+      win.setMenu(null)
 
       is.dev
         ? win.loadURL('http://localhost:4321')

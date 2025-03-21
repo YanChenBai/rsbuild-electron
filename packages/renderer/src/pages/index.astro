@@ -1,4 +1,5 @@
 ---
+import WindowNav from '../components/WindowNav.vue'
 import Layout from '../layouts/Layout.astro'
 ---
 
@@ -21,54 +22,11 @@ window.onload = () => {
   selectBtnById('close', () => {
     invoke.window.close()
   })
-
-  selectBtnById('config-get', () => {
-    invoke.config.getAll()
-      .then((res) => {
-        // eslint-disable-next-line no-console
-        console.log(res)
-      })
-  })
-
-  let count = 1
-  selectBtnById('config-add', () => {
-    invoke.config.setItem(`test${count++}`, 'test')
-    // eslint-disable-next-line no-console
-      .then(console.log)
-  })
-
-  selectBtnById('get-user-list', () => {
-    invoke.window.ipv4()
-      .then((res) => {
-        // eslint-disable-next-line no-console
-        console.log(res)
-      })
-  })
-
-  const startTime = Date.now()
-  invoke.image.readImage('D:\\byc_file\\qq\\弥生提交.jpg', 1000)
-    .then((res) => {
-      const blob = new Blob([res], { type: 'image/webp' })
-      const imgUrl = URL.createObjectURL(blob)
-      document.querySelector('#img')?.setAttribute('src', imgUrl)
-      console.log(Date.now() - startTime)
-    })
 }
 </script>
 
 <Layout>
   <div>
-    <div class="bg-white/10 h-8 drag flex justify-end">
-      <button id="min" class="px2 py1 no-drag">最小化</button>
-      <button id="max" class="px2 py1 no-drag">最大化</button>
-      <button id="close" class="px2 py1 no-drag">关闭</button>
-    </div>
-
-    <div class="p2">
-      <button id="config-get" class="px2 py1">Get config</button>
-      <button id="config-add" class="px2 py1">Add config</button>
-      <button id="get-user-list" class="px2 py1">Get user list</button>
-      <img id="img" />
-    </div>
+    <WindowNav client:load></WindowNav>
   </div>
 </Layout>

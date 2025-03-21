@@ -18,3 +18,9 @@ export interface ConfigHandler extends FnMap {
 export interface ImageHandler extends FnMap {
   readImage: (path: string, size?: number) => Promise<ArrayBuffer>
 }
+
+export interface MouseListener extends FnMap {
+  onMove: (pos: { x: number, y: number }) => void
+  onEnter: () => void
+  onLeave: () => void
+}

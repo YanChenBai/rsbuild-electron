@@ -1,23 +1,18 @@
 import type { RsbuildPlugin } from '@rsbuild/core'
 import { exec, spawn } from 'node:child_process'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
-import path, { resolve } from 'node:path'
+import { resolve } from 'node:path'
 import process from 'node:process'
 
-const LockFiles = {
-  'yarn.lock': 'yarn',
-  'package-lock.json': 'npm',
-  'pnpm-lock.yaml': 'pnpm -w',
-  'bun.lockb': 'bun',
-  'deno.lock': 'deno',
-}
-
-function detectPackageManager(dir = process.cwd()) {
-  for (const [lockFile, manager] of Object.entries(LockFiles)) {
-    if (existsSync(path.join(dir, lockFile))) {
-      return manager
-    }
-  }
+function detectPackageManager() {
+  const path = process.env.npm_execpath
+  if (path?.includes('yarn'))
+    return 'yarn'
+  if (path?.endsWith('\pnpm.cjs'))
+    return 'pnpm -w'
+  if (path?.endsWith('\npm-cli.js'))
+    return 'npm'
+  return 'npm'
 }
 
 function isPidValid(pid: number): Promise<boolean> {
@@ -53,9 +48,9 @@ async function killProcessByPid(pid: number) {
   })
 }
 
-export function electronRestart(options: { script: string, root?: string, firstStart?: boolean }): RsbuildPlugin {
+export function electronRestart(options: { script: string }): RsbuildPlugin {
   const PID_PATH = resolve(__dirname, '.pid')
-  const { script, root = process.cwd(), firstStart = true } = options
+  const { script } = options
   function savePid(pid: number) {
     const pidStr = `${pid}`
 
@@ -73,6 +68,8 @@ export function electronRestart(options: { script: string, root?: string, firstS
   return {
     name: 'electron-restart',
     setup: (api) => {
+      const rspack = api.getRsbuildConfig().tools?.rspack as { target: string }
+
       const exit = async () => {
         const pid = getPid()
 
@@ -83,12 +80,12 @@ export function electronRestart(options: { script: string, root?: string, firstS
       api.modifyRsbuildConfig(() => exit())
 
       api.onBeforeBuild(async ({ isFirstCompile, isWatch }) => {
-        if (isFirstCompile && !firstStart)
+        if (isFirstCompile && rspack.target !== 'electron-main')
           return
 
         await exit()
 
-        const packageManager = detectPackageManager(root)
+        const packageManager = detectPackageManager()
 
         if (!packageManager)
           throw new Error('No package manager detected')

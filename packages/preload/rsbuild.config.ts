@@ -7,8 +7,6 @@ export default defineConfig({
   plugins: [
     electronRestart({
       script: 'dev:electron',
-      root: resolve(__dirname, '../../'),
-      firstStart: false,
     }),
   ],
   source: {
