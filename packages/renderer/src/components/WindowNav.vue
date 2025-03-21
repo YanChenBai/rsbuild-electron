@@ -8,17 +8,17 @@ const pos = ref({ x: 0, y: 0 })
 let off = () => {}
 
 onMounted(() => {
-  // listener.mouse.onEnter(() => {
-  //   isHover.value = true
-  // })
+  listener.window.onEnter(() => {
+    isHover.value = true
+  })
 
-  // listener.mouse.onLeave(() => {
-  //   isHover.value = false
-  // })
+  listener.window.onLeave(() => {
+    isHover.value = false
+  })
 
   const elements = new Set<HTMLDivElement>()
 
-  off = listener.mouse.onMove((event) => {
+  off = listener.window.onMove((event) => {
     pos.value = event
     const pointElement = document.elementFromPoint(event.x, event.y)
 

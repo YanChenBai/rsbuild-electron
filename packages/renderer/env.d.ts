@@ -1,4 +1,5 @@
-import type { ConfigHandler, ImageHandler, MouseListener, WindowHandler } from '../types/tipc'
+import type { WindowHandler, WindowListener } from '@byc/window-tipc/type'
+import type { ConfigHandler, ImageHandler } from '../types/tipc'
 
 export {}
 
@@ -10,6 +11,6 @@ declare module '@byc/tipc' {
   }
 
   interface TipcListenerExpose {
-    mouse: MouseListener
+    window: WindowListener
   }
 }

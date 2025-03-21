@@ -1,27 +1,11 @@
-import type { ConfigHandler, ImageHandler, WindowHandler } from '../types/tipc'
+import type { ConfigHandler, ImageHandler } from '../types/tipc'
 import path from 'node:path'
 import { useTipc } from '@byc/tipc/main'
+import { useWindowTipc } from '@byc/window-tipc'
 import { is } from '@electron-toolkit/utils'
 import { app, BrowserWindow } from 'electron'
-import { getUserKeyList } from 'hmc-win32'
 import sharp from 'sharp'
-import { mouseListener } from './utils/mouseListener'
 import { prisma } from './utils/prisma'
-
-const windowTipc = useTipc<WindowHandler>('window', {
-  max(meta) {
-    meta.win?.maximize()
-  },
-  min(meta) {
-    meta.win?.minimize()
-  },
-  close(meta) {
-    meta.win?.close()
-  },
-  ipv4() {
-    return getUserKeyList().join('|')
-  },
-})
 
 const configTipc = useTipc<ConfigHandler>('config', {
   async setItem(_, name, value) {
@@ -73,20 +57,21 @@ const imageTipc = useTipc<ImageHandler>('image', {
   },
 })
 
+const windowTipc = useWindowTipc('window')
+
 function startApp() {
   app.whenReady()
     .then(async () => {
-      windowTipc.init()
       configTipc.init()
       imageTipc.init()
-
-      mouseListener()
+      windowTipc.init()
 
       const win = new BrowserWindow({
         width: 800,
         height: 600,
         frame: false,
-        type: 'toolbar',
+        // type: 'toolbar',
+        alwaysOnTop: true,
         webPreferences: {
           sandbox: false,
           nodeIntegration: false,

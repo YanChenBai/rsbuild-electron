@@ -12,11 +12,11 @@ function selectBtnById(id: string, cb: () => void) {
 
 window.onload = () => {
   selectBtnById('min', () => {
-    invoke.window.min()
+    invoke.window.minimize()
   })
 
   selectBtnById('max', () => {
-    invoke.window.max()
+    invoke.window.maximize()
   })
 
   selectBtnById('close', () => {

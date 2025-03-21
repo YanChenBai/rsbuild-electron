@@ -1,14 +1,13 @@
 import { resolve } from 'node:path'
 import process from 'node:process'
+import electronAutoRestart from '@byc/electron-auto-restart'
 import { defineConfig } from '@rsbuild/core'
-import { electronRestart } from 'rsbuild-electron-restart'
 
 export default defineConfig({
   root: resolve(__dirname, '.'),
   plugins: [
-    electronRestart({
+    electronAutoRestart({
       script: 'dev:electron',
-      root: resolve(__dirname, '../../'),
     }),
   ],
   source: {
@@ -30,8 +29,7 @@ export default defineConfig({
         electronMain: true,
       },
       target: 'electron-main',
-      externals: process.env.DEV ? ['sharp', 'hmc-win32'] : ['sharp'],
-
+      externals: process.env.DEV ? [] : ['sharp'],
     },
   },
 })
