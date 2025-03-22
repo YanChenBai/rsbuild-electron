@@ -7,6 +7,7 @@ import { app, BrowserWindow } from 'electron'
 import sharp from 'sharp'
 import { prisma } from './utils/prisma'
 
+const windowTipc = useWindowTipc()
 const configTipc = useTipc<ConfigHandler>('config', {
   async setItem(_, name, value) {
     await prisma.config.upsert({
@@ -71,7 +72,6 @@ function startApp() {
         height: 600,
         frame: false,
         // type: 'toolbar',
-        alwaysOnTop: true,
         webPreferences: {
           sandbox: false,
           nodeIntegration: false,

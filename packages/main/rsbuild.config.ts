@@ -1,12 +1,12 @@
 import { resolve } from 'node:path'
 import process from 'node:process'
-import electronAutoRestart from '@byc/electron-auto-restart'
+import AutoRestart from '@byc/electron-auto-restart'
 import { defineConfig } from '@rsbuild/core'
 
 export default defineConfig({
   root: resolve(__dirname, '.'),
   plugins: [
-    electronAutoRestart({
+    AutoRestart({
       script: 'dev:electron',
     }),
   ],
