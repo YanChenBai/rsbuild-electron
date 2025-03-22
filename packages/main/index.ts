@@ -58,8 +58,6 @@ const imageTipc = useTipc<ImageHandler>('image', {
   },
 })
 
-const windowTipc = useWindowTipc('window')
-
 function startApp() {
   app.whenReady()
     .then(async () => {
