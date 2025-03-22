@@ -11,6 +11,9 @@ importers:
       '@byc/tipc':
         specifier: ^0.0.92
         version: 0.0.92
+      '@byc/window-tipc':
+        specifier: ^0.0.6
+        version: 0.0.6
       '@electron/rebuild':
         specifier: ^3.7.1
         version: 3.7.1
@@ -33,6 +36,9 @@ importers:
       '@antfu/ni':
         specifier: ^0.23.2
         version: 0.23.2
+      '@byc/electron-auto-restart':
+        specifier: ^0.0.2
+        version: 0.0.2
       '@rsbuild/core':
         specifier: ^1.1.8
         version: 1.1.12
@@ -69,9 +75,6 @@ importers:
       prisma:
         specifier: ^6.5.0
         version: 6.5.0(typescript@5.7.2)
-      rsbuild-electron-restart:
-        specifier: workspace:*
-        version: link:packages/rsbuild-electron-restart
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
@@ -114,8 +117,6 @@ importers:
       unplugin-vue-components:
         specifier: ^28.4.1
         version: 28.4.1(@babel/parser@7.26.10)(vue@3.5.13(typescript@5.7.2))
-
-  packages/rsbuild-electron-restart: {}
 
 packages:
 
@@ -345,8 +346,17 @@ packages:
     resolution: {integrity: sha512-emqcG3vHrpxUKTrxcblR36dcrcoRDvKmnL/dCL6ZsHaShW80qxCAcNhzQZrpeM765VzEos+xOi4s+r4IXzTwdQ==}
     engines: {node: '>=6.9.0'}
 
+  '@byc/electron-auto-restart@0.0.2':
+    resolution: {integrity: sha512-NbpPMZFWMW6neFwaxpebEPA22MgRKoNxJ3LRnebQGy90fuKvCbXu/Yw1Kc76trpjU8V2nUInYRJ5QEA1qcdH1A==}
+
   '@byc/tipc@0.0.92':
     resolution: {integrity: sha512-DxOWHeDiEks9A2ElDrpU34cEYPVp1KMlvJZWYh7T4BSsi6ZKKNyXMTp3l98JkeAbza5ew0F4H4hwWVYbWtsp3Q==}
+
+  '@byc/tipc@0.0.93':
+    resolution: {integrity: sha512-DI5S0jL77/lFW7gr3+ObXI1miea5Mw7wv/ceR4D6uatxpbMao2vMD0q6kNS+FFhAhnuK12Mz+KFLztmyxUcHiw==}
+
+  '@byc/window-tipc@0.0.6':
+    resolution: {integrity: sha512-OAoF/0yJYSueoMKZH9+B9xrH68DQ1QSwUz3HoZWpLwAXUQscKywmCUPk0grfarf1hFUNV8XcF8AU7stDEbBegw==}
 
   '@clack/core@0.4.1':
     resolution: {integrity: sha512-Pxhij4UXg8KSr7rPek6Zowm+5M22rbd2g1nfojHJkxp5YkFqiZ2+YLEM/XGVIzvGOcM0nqjIFxrpDwWRZYWYjA==}
@@ -5169,7 +5179,17 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
+  '@byc/electron-auto-restart@0.0.2': {}
+
   '@byc/tipc@0.0.92': {}
+
+  '@byc/tipc@0.0.93': {}
+
+  '@byc/window-tipc@0.0.6':
+    dependencies:
+      '@byc/tipc': 0.0.93
+      hmc-win32: 1.4.92
+      lodash-es: 4.17.21
 
   '@clack/core@0.4.1':
     dependencies:
