@@ -1,32 +1,8 @@
 ---
-import WindowNav from '../components/WindowNav.vue'
 import Layout from '../layouts/Layout.astro'
 ---
-
-<script>
-import { invoke } from '@byc/tipc'
-
-function selectBtnById(id: string, cb: () => void) {
-  return document.querySelector<HTMLButtonElement>(`#${id}`)?.addEventListener('click', cb)
-}
-
-window.onload = () => {
-  selectBtnById('min', () => {
-    invoke.window.minimize()
-  })
-
-  selectBtnById('max', () => {
-    invoke.window.maximize()
-  })
-
-  selectBtnById('close', () => {
-    invoke.window.close()
-  })
-}
-</script>
-
 <Layout>
   <div>
-    <WindowNav client:load></WindowNav>
+
   </div>
 </Layout>

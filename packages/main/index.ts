@@ -70,15 +70,19 @@ function startApp() {
         height: 600,
         frame: false,
         // type: 'toolbar',
+        alwaysOnTop: true,
         webPreferences: {
           sandbox: false,
+          devTools: true,
           nodeIntegration: false,
           contextIsolation: true,
           preload: path.resolve(__dirname, '../preload/index.js'),
         },
       })
 
+      windowTipc.startListen(win)
       win.setMenu(null)
+      win.webContents.openDevTools()
 
       is.dev
         ? win.loadURL('http://localhost:4321')

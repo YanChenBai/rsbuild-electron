@@ -1,5 +1,7 @@
 ---
+import WindowHeader from '../components/WindowHeader.vue'
 import '@unocss/reset/tailwind-compat.css'
+import 'primeicons/primeicons.css'
 ---
 
 <!doctype html>
@@ -12,6 +14,7 @@ import '@unocss/reset/tailwind-compat.css'
     <title>Blive</title>
   </head>
   <body class="hover">
+    <WindowHeader client:load />
     <slot />
   </body>
 </html>

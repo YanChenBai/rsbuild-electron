@@ -5,7 +5,7 @@
   "packageManager": "pnpm@9.15.9",
   "main": "./out/main/index.js",
   "scripts": {
-    "dev": "chcp 65001 && run-p dev:main dev:preload dev:renderer dev:electron",
+    "dev": "chcp 65001 && run-p dev:main dev:preload dev:renderer",
     "dev:main": "pnpm --filter main run dev",
     "dev:preload": "pnpm --filter preload run dev",
     "dev:renderer": "pnpm --filter renderer run dev",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@byc/tipc": "^0.0.92",
-    "@byc/window-tipc": "^0.0.6",
+    "@byc/window-tipc": "^0.1.0",
     "@electron/rebuild": "^3.7.1",
     "@prisma/client": "6.5.0",
     "npm-run-all2": "^7.0.2",
@@ -34,7 +34,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^4.10.1",
     "@antfu/ni": "^0.23.2",
-    "@byc/electron-auto-restart": "^0.0.2",
+    "@byc/electron-auto-restart": "^0.0.3",
     "@rsbuild/core": "^1.1.8",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^22.13.10",

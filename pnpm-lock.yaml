@@ -12,8 +12,8 @@ importers:
         specifier: ^0.0.92
         version: 0.0.92
       '@byc/window-tipc':
-        specifier: ^0.0.6
-        version: 0.0.6
+        specifier: ^0.1.0
+        version: 0.1.0
       '@electron/rebuild':
         specifier: ^3.7.1
         version: 3.7.1
@@ -37,8 +37,8 @@ importers:
         specifier: ^0.23.2
         version: 0.23.2
       '@byc/electron-auto-restart':
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.3
+        version: 0.0.3
       '@rsbuild/core':
         specifier: ^1.1.8
         version: 1.2.19
@@ -104,6 +104,9 @@ importers:
       astro:
         specifier: ^5.5.2
         version: 5.5.3(@types/node@22.13.11)(jiti@2.4.2)(rollup@4.36.0)(typescript@5.8.2)(yaml@2.7.0)
+      primeicons:
+        specifier: ^7.0.0
+        version: 7.0.0
       primevue:
         specifier: ^4.3.2
         version: 4.3.2(vue@3.5.13(typescript@5.8.2))
@@ -346,8 +349,8 @@ packages:
     resolution: {integrity: sha512-emqcG3vHrpxUKTrxcblR36dcrcoRDvKmnL/dCL6ZsHaShW80qxCAcNhzQZrpeM765VzEos+xOi4s+r4IXzTwdQ==}
     engines: {node: '>=6.9.0'}
 
-  '@byc/electron-auto-restart@0.0.2':
-    resolution: {integrity: sha512-NbpPMZFWMW6neFwaxpebEPA22MgRKoNxJ3LRnebQGy90fuKvCbXu/Yw1Kc76trpjU8V2nUInYRJ5QEA1qcdH1A==}
+  '@byc/electron-auto-restart@0.0.3':
+    resolution: {integrity: sha512-fqnxRWHreujpNgQP5auSML4BSzJ5dF/0PCAptdRAoMfVLiDepuLoXiyKQK4suR8GaPtVVFcmr1fuCBxFt72ihQ==}
 
   '@byc/tipc@0.0.92':
     resolution: {integrity: sha512-DxOWHeDiEks9A2ElDrpU34cEYPVp1KMlvJZWYh7T4BSsi6ZKKNyXMTp3l98JkeAbza5ew0F4H4hwWVYbWtsp3Q==}
@@ -355,8 +358,8 @@ packages:
   '@byc/tipc@0.0.93':
     resolution: {integrity: sha512-DI5S0jL77/lFW7gr3+ObXI1miea5Mw7wv/ceR4D6uatxpbMao2vMD0q6kNS+FFhAhnuK12Mz+KFLztmyxUcHiw==}
 
-  '@byc/window-tipc@0.0.6':
-    resolution: {integrity: sha512-OAoF/0yJYSueoMKZH9+B9xrH68DQ1QSwUz3HoZWpLwAXUQscKywmCUPk0grfarf1hFUNV8XcF8AU7stDEbBegw==}
+  '@byc/window-tipc@0.1.0':
+    resolution: {integrity: sha512-ly+6qr6BCSnC2CZ5azESmUCDmwSzy2S7eQqRS+vhV+VwPNOkLwX7yDF6htLn3330ZuHdr0u69Yiit1KWBjL6Xg==}
 
   '@clack/core@0.4.1':
     resolution: {integrity: sha512-Pxhij4UXg8KSr7rPek6Zowm+5M22rbd2g1nfojHJkxp5YkFqiZ2+YLEM/XGVIzvGOcM0nqjIFxrpDwWRZYWYjA==}
@@ -3827,6 +3830,9 @@ packages:
     resolution: {integrity: sha512-4yf0QO/sllf/1zbZWYnvWw3NxCQwLXKzIj0G849LSufP15BXKM0rbD2Z3wVnkMfjdn/CB0Dpp444gYAACdsplg==}
     engines: {node: '>=18'}
 
+  primeicons@7.0.0:
+    resolution: {integrity: sha512-jK3Et9UzwzTsd6tzl2RmwrVY/b8raJ3QZLzoDACj+oTJ0oX7L9Hy+XnVwgo4QVKlKpnP/Ur13SXV/pVh4LzaDw==}
+
   primevue@4.3.2:
     resolution: {integrity: sha512-TCCLu66k0pW8LmL8ho4w8evPEwc1agCP4ojY5OIsr2pqYepzBqlsSP2GSSv+Kv5EwWqg4ufh0bor+XVJl9sIVw==}
     engines: {node: '>=12.11.0'}
@@ -5203,13 +5209,15 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@byc/electron-auto-restart@0.0.2': {}
+  '@byc/electron-auto-restart@0.0.3':
+    dependencies:
+      read-pkg: 9.0.1
 
   '@byc/tipc@0.0.92': {}
 
   '@byc/tipc@0.0.93': {}
 
-  '@byc/window-tipc@0.0.6':
+  '@byc/window-tipc@0.1.0':
     dependencies:
       '@byc/tipc': 0.0.93
       hmc-win32: 1.4.92
@@ -9418,6 +9426,8 @@ snapshots:
   pretty-ms@9.2.0:
     dependencies:
       parse-ms: 4.0.0
+
+  primeicons@7.0.0: {}
 
   primevue@4.3.2(vue@3.5.13(typescript@5.8.2)):
     dependencies:
