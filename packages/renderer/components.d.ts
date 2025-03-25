@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Button: typeof import('primevue/button')['default']
+    ImageInput: typeof import('./src/components/ImageInput.vue')['default']
     NameDisplay: typeof import('./src/components/NameDisplay.vue')['default']
     WindowHeader: typeof import('./src/components/WindowHeader.vue')['default']
     WindowNav: typeof import('./src/components/WindowNav.vue')['default']

@@ -3,7 +3,8 @@
   "compilerOptions": {
     "composite": true,
     "types": [
-      "primevue"
+      "primevue",
+      "@byc/window-tipc/env"
     ],
     "allowImportingTsExtensions": false,
     "noEmit": false
@@ -11,7 +12,8 @@
   "include": [
     ".astro/types.d.ts",
     "**/*",
-    "../types/**/*"
+    "../types/**/*",
+    "../main/tipc.d.ts"
   ],
   "exclude": ["dist"]
 }

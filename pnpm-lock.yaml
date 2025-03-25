@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@byc/tipc':
-        specifier: ^0.0.93
-        version: 0.0.93
-      '@byc/window-tipc':
         specifier: ^0.1.0
         version: 0.1.0
+      '@byc/window-tipc':
+        specifier: ^0.1.3
+        version: 0.1.3
       '@electron/rebuild':
         specifier: ^3.7.1
         version: 3.7.1
@@ -37,8 +37,8 @@ importers:
         specifier: ^24.3.0
         version: 24.3.0
       '@byc/electron-auto-restart':
-        specifier: ^0.0.4
-        version: 0.0.4
+        specifier: ^0.0.5
+        version: 0.0.5
       '@rsbuild/core':
         specifier: ^1.2.19
         version: 1.2.19
@@ -84,6 +84,9 @@ importers:
 
   packages/main:
     dependencies:
+      '@byc/unplugin-tipc':
+        specifier: 0.0.1
+        version: 0.0.1
       '@electron-toolkit/utils':
         specifier: ^4.0.0
         version: 4.0.0(electron@35.0.3)
@@ -352,14 +355,17 @@ packages:
     resolution: {integrity: sha512-emqcG3vHrpxUKTrxcblR36dcrcoRDvKmnL/dCL6ZsHaShW80qxCAcNhzQZrpeM765VzEos+xOi4s+r4IXzTwdQ==}
     engines: {node: '>=6.9.0'}
 
-  '@byc/electron-auto-restart@0.0.4':
-    resolution: {integrity: sha512-cIO71UzCZI2WZUDgLolG3kHgj8UMifEfInI9vvTURfnKB3NLw11V+5xhS99K6A1mM18gs78qKGoiLeOmKcHSEg==}
+  '@byc/electron-auto-restart@0.0.5':
+    resolution: {integrity: sha512-Hnpvgla3wfDGhn0rngSA1172MpL7VnYkvB1Cmf23LC3rgyfEpWwnQcgbpJt7E4Mwrm6CVBKukFdkAd3u7UYDvg==}
 
-  '@byc/tipc@0.0.93':
-    resolution: {integrity: sha512-DI5S0jL77/lFW7gr3+ObXI1miea5Mw7wv/ceR4D6uatxpbMao2vMD0q6kNS+FFhAhnuK12Mz+KFLztmyxUcHiw==}
+  '@byc/tipc@0.1.0':
+    resolution: {integrity: sha512-uKA2YxAsLjtZR8R5mJBmZ+2o6VlYlaYNIhov1BZBAhj6gjHWXHiQUdR1PejZPF9dzCz+l6gRulouvlqTqteleQ==}
 
-  '@byc/window-tipc@0.1.0':
-    resolution: {integrity: sha512-ly+6qr6BCSnC2CZ5azESmUCDmwSzy2S7eQqRS+vhV+VwPNOkLwX7yDF6htLn3330ZuHdr0u69Yiit1KWBjL6Xg==}
+  '@byc/unplugin-tipc@0.0.1':
+    resolution: {integrity: sha512-9RqX7rhBYxdT6Al1qBfxU5/6mxVx6iXrF3DEAi4yCFmF3p5oQsjC7cgTCJlA2QQaw54SmK11BgecdHxshqbvTQ==}
+
+  '@byc/window-tipc@0.1.3':
+    resolution: {integrity: sha512-thKkMlY4kCKOsfPfThLVBfFI0AZEjHuJlvIVYpViqcOj2p6JXeZmO2m0XVujptO35jPJPZtDUDMneXd39Z2jTw==}
 
   '@clack/core@0.4.1':
     resolution: {integrity: sha512-Pxhij4UXg8KSr7rPek6Zowm+5M22rbd2g1nfojHJkxp5YkFqiZ2+YLEM/XGVIzvGOcM0nqjIFxrpDwWRZYWYjA==}
@@ -859,6 +865,72 @@ packages:
 
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
+
+  '@oxc-parser/binding-darwin-arm64@0.61.2':
+    resolution: {integrity: sha512-xpDuwawMDCHg3plbSjpMbrhNTzO1AlvvHqsUOTE3WDmv5K7fFD72f3Pl+SxPJ4D/IhMdskec1B5ZfZHM1iAFmQ==}
+    engines: {node: '>=14.0.0'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@oxc-parser/binding-darwin-x64@0.61.2':
+    resolution: {integrity: sha512-1zjghOALDDhg5mPJgQfoud/bLOxD3M9n8l2LxXK4NngxGh3xXq1K7vAs2dzDnwZI6FaStrrBMDJSocT2hggiLg==}
+    engines: {node: '>=14.0.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@oxc-parser/binding-linux-arm-gnueabihf@0.61.2':
+    resolution: {integrity: sha512-OppSdOE7BAHfx/hNbsS4tf+CPCEWEXeEB/4tJKcv6qysZKsTD6XXWUzn2F7KR7TFNSzA0hPjnZyezjFgo+xvcQ==}
+    engines: {node: '>=14.0.0'}
+    cpu: [arm]
+    os: [linux]
+
+  '@oxc-parser/binding-linux-arm64-gnu@0.61.2':
+    resolution: {integrity: sha512-CqhKWDvVr4rZpi8Evh/K7FKwn9UnPhF0F0ivF+CsFCMOaS5egalmFRRybQk1QuwGq1XjTA3D8puqvlF0p82+ew==}
+    engines: {node: '>=14.0.0'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxc-parser/binding-linux-arm64-musl@0.61.2':
+    resolution: {integrity: sha512-wLtzWy6EyMf7F83pcJhanolaQ7xnwnVAj2wjdJ52qgX4oQjqZZUo6Rk/LE2iY8Aq/R2Bx2yREFeIC4R1kjtB0A==}
+    engines: {node: '>=14.0.0'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
+  '@oxc-parser/binding-linux-x64-gnu@0.61.2':
+    resolution: {integrity: sha512-aJ+g/pDcOeqfB2bVZkUjHlCBL8H7lsgkuYVGKKLYxN/oLjrt2Jf/BVu6fL3NxmSSaFmtHKowDgoRAjiKwxQWEQ==}
+    engines: {node: '>=14.0.0'}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxc-parser/binding-linux-x64-musl@0.61.2':
+    resolution: {integrity: sha512-PosnNyxTqCiMTgva5w695p3ooCcFU8tU+c+JnGgkBgD8pKTbV6fwn8dc4GlcgyyLaM1rD+zi/s+4ooTVML8iIA==}
+    engines: {node: '>=14.0.0'}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  '@oxc-parser/binding-wasm32-wasi@0.61.2':
+    resolution: {integrity: sha512-zOxdLDItMXeB1GdVCtOOW+aC+Ra6C4E1ivT4rbhaaVe70RsCRa2fGmNC0divvgfQsL2eGBkCuB4d4N9DjfhK4Q==}
+    engines: {node: '>=14.0.0'}
+    cpu: [wasm32]
+
+  '@oxc-parser/binding-win32-arm64-msvc@0.61.2':
+    resolution: {integrity: sha512-E7VMrb4XF748hyzIax2KV7TEfi27SfXoi/BH5guiBicSef/31qwHRdKCh708lmIYmbeEJ9D0wO/25K6dvTl8QQ==}
+    engines: {node: '>=14.0.0'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@oxc-parser/binding-win32-x64-msvc@0.61.2':
+    resolution: {integrity: sha512-GtRVVz4DGF94MzlJ7xCIpITu6WKYdTqWc2cqMaJEzYDC8EsHjNkfbGhmawhyodFFuTfWqPAjJecIvvAnfMLpxw==}
+    engines: {node: '>=14.0.0'}
+    cpu: [x64]
+    os: [win32]
+
+  '@oxc-project/types@0.61.2':
+    resolution: {integrity: sha512-rfuwJwvwn9MRthHNXlSo9Eka/u7gC0MhnWAoX3BhE1+rwPOl22nq0K0Y997Hof0tHCOuD7H3/Z8HTfCVhB4c5Q==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -3683,6 +3755,10 @@ packages:
     resolution: {integrity: sha512-qFOyK5PjiWZd+QQIh+1jhdb9LpxTF0qs7Pm8o5QHYZ0M3vKqSqzsZaEB6oWlxZ+q2sJBMI/Ktgd2N5ZwQoRHfg==}
     engines: {node: '>= 0.4'}
 
+  oxc-parser@0.61.2:
+    resolution: {integrity: sha512-ZJnAP7VLQhqqnfku7+gssTwmbQyfbZ552Vly4O2BMHkvDwfwLlPtAIYjMq57Lcj5HLmopI0oZlk7xTSML/YsZA==}
+    engines: {node: '>=14.0.0'}
+
   p-cancelable@2.1.1:
     resolution: {integrity: sha512-BZOr3nRQHOntUjTrH8+Lh54smKHoHyur8We1V8DSMVrl5A2malOOwuJRnKRDjSnkoeBh4at6BwEnb5I7Jl31wg==}
     engines: {node: '>=8'}
@@ -5229,19 +5305,20 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@byc/electron-auto-restart@0.0.4':
+  '@byc/electron-auto-restart@0.0.5':
     dependencies:
       '@types/proper-lockfile': 4.1.4
       proper-lockfile: 4.1.2
       read-pkg: 9.0.1
 
-  '@byc/tipc@0.0.93': {}
+  '@byc/tipc@0.1.0': {}
 
-  '@byc/window-tipc@0.1.0':
+  '@byc/unplugin-tipc@0.0.1':
     dependencies:
-      '@byc/tipc': 0.0.93
-      hmc-win32: 1.4.92
-      lodash-es: 4.17.21
+      oxc-parser: 0.61.2
+      unplugin-utils: 0.2.4
+
+  '@byc/window-tipc@0.1.3': {}
 
   '@clack/core@0.4.1':
     dependencies:
@@ -5739,6 +5816,40 @@ snapshots:
       rimraf: 3.0.2
 
   '@oslojs/encoding@1.1.0': {}
+
+  '@oxc-parser/binding-darwin-arm64@0.61.2':
+    optional: true
+
+  '@oxc-parser/binding-darwin-x64@0.61.2':
+    optional: true
+
+  '@oxc-parser/binding-linux-arm-gnueabihf@0.61.2':
+    optional: true
+
+  '@oxc-parser/binding-linux-arm64-gnu@0.61.2':
+    optional: true
+
+  '@oxc-parser/binding-linux-arm64-musl@0.61.2':
+    optional: true
+
+  '@oxc-parser/binding-linux-x64-gnu@0.61.2':
+    optional: true
+
+  '@oxc-parser/binding-linux-x64-musl@0.61.2':
+    optional: true
+
+  '@oxc-parser/binding-wasm32-wasi@0.61.2':
+    dependencies:
+      '@napi-rs/wasm-runtime': 0.2.7
+    optional: true
+
+  '@oxc-parser/binding-win32-arm64-msvc@0.61.2':
+    optional: true
+
+  '@oxc-parser/binding-win32-x64-msvc@0.61.2':
+    optional: true
+
+  '@oxc-project/types@0.61.2': {}
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -9310,6 +9421,21 @@ snapshots:
       get-intrinsic: 1.3.0
       object-keys: 1.1.1
       safe-push-apply: 1.0.0
+
+  oxc-parser@0.61.2:
+    dependencies:
+      '@oxc-project/types': 0.61.2
+    optionalDependencies:
+      '@oxc-parser/binding-darwin-arm64': 0.61.2
+      '@oxc-parser/binding-darwin-x64': 0.61.2
+      '@oxc-parser/binding-linux-arm-gnueabihf': 0.61.2
+      '@oxc-parser/binding-linux-arm64-gnu': 0.61.2
+      '@oxc-parser/binding-linux-arm64-musl': 0.61.2
+      '@oxc-parser/binding-linux-x64-gnu': 0.61.2
+      '@oxc-parser/binding-linux-x64-musl': 0.61.2
+      '@oxc-parser/binding-wasm32-wasi': 0.61.2
+      '@oxc-parser/binding-win32-arm64-msvc': 0.61.2
+      '@oxc-parser/binding-win32-x64-msvc': 0.61.2
 
   p-cancelable@2.1.1: {}
 

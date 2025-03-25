@@ -1,6 +1,7 @@
 import type { ConfigHandler, ImageHandler } from '../types/tipc'
 import path from 'node:path'
 import { useTipc } from '@byc/tipc/main'
+import { defineSchema } from '@byc/tipc/schema'
 import { useWindowTipc } from '@byc/window-tipc'
 import { is } from '@electron-toolkit/utils'
 import { app, BrowserWindow } from 'electron'
@@ -8,7 +9,10 @@ import sharp from 'sharp'
 import { prisma } from './utils/prisma'
 
 const windowTipc = useWindowTipc()
-const configTipc = useTipc<ConfigHandler>('config', {
+export const configTipcSchema = defineSchema<ConfigHandler>('config')
+export const imageTipcSchema = defineSchema<ImageHandler>('image')
+
+const configTipc = useTipc(configTipcSchema, {
   async setItem(_, name, value) {
     await prisma.config.upsert({
       where: {
@@ -48,7 +52,7 @@ const configTipc = useTipc<ConfigHandler>('config', {
   },
 })
 
-const imageTipc = useTipc<ImageHandler>('image', {
+const imageTipc = useTipc(imageTipcSchema, {
   async readImage(_, path, size) {
     const buffer = await sharp(path)
       .resize(size)

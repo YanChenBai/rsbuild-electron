@@ -23,8 +23,8 @@
     "prisma:deploy": "prisma migrate deploy"
   },
   "dependencies": {
-    "@byc/tipc": "^0.0.93",
-    "@byc/window-tipc": "^0.1.0",
+    "@byc/tipc": "^0.1.0",
+    "@byc/window-tipc": "^0.1.3",
     "@electron/rebuild": "^3.7.1",
     "@prisma/client": "6.5.0",
     "npm-run-all2": "^7.0.2",

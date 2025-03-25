@@ -1,12 +1,14 @@
 import { resolve } from 'node:path'
 import process from 'node:process'
 import AutoRestart from '@byc/electron-auto-restart'
+import UnpluginTipc from '@byc/unplugin-tipc'
 import { defineConfig } from '@rsbuild/core'
 
 export default defineConfig({
   root: resolve(__dirname, '.'),
   plugins: [
     AutoRestart(),
+    UnpluginTipc(),
   ],
   source: {
     entry: {
